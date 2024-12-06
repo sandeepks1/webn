@@ -37,7 +37,10 @@ async function classifyImage(pathToImage){
   async function runModel(preprocessedData) { 
     // Set up environment.
     ort.env.wasm.numThreads = 1; 
+  //  alert("hi")
     ort.env.wasm.simd = true; 
+    console.log("Available execution providers:", ort.env.wasm.availableExecutionProviders);
+
     // Uncomment for additional information in debug builds:
     // ort.env.wasm.proxy = true; 
     // ort.env.logLevel = "verbose";  
@@ -66,7 +69,7 @@ async function classifyImage(pathToImage){
     var outputSoftmax = softmax(Array.prototype.slice.call(output.data)); 
     // Get the top 5 results.
     var results = imagenetClassesTopK(outputSoftmax, 5);
-
+    debugger
     return results; 
   }
   // The softmax transforms values to be between 0 and 1.
